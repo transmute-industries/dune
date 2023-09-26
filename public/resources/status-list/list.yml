@@ -23,5 +23,7 @@ get:
         application/json:
           schema:
             type: string
+            example:
+              "eyJhbGciOiJFUzM4NCJ9.eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvdjIiXSwiaWQiOiJ1cm46dXVpZDozMDA4ZjliZS1lYTlhLTRhOTEtODcwNy04NGI1ZDQwMmEzODciLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIiwiU3RhdHVzTGlzdDIwMjFDcmVkZW50aWFsIl0sImlzc3VlciI6eyJpZCI6ImRpZDp3ZWI6ZHVuZS5kaWQuYWkifSwidmFsaWRGcm9tIjoiMjAyMy0wOS0yNlQyMjoyNzowOC4wNTZaIiwiY3JlZGVudGlhbFN1YmplY3QiOnsiaWQiOiJ1cm46dXVpZDozMDA4ZjliZS1lYTlhLTRhOTEtODcwNy04NGI1ZDQwMmEzODcjbGlzdCIsInR5cGUiOiJTdGF0dXNMaXN0MjAyMSIsInN0YXR1c1B1cnBvc2UiOiJyZXZvY2F0aW9uIiwiZW5jb2RlZExpc3QiOiJINHNJQUFBQUFBQUFBMk1BQUkzdkF0SUJBQUFBIn0sIl9zZF9hbGciOiJzaGEtMjU2In0.CL6CkyRnqrjhrPpJxXTSnRk6M0UCSlepy2xyWQ9-BWIuLlvSNfWQfHN0UMa8cbJsV1W1piMEQXwk4eFGxhvGNBnX76ngIFV6ljAGl6JNaYffEQ1ctqcA6UtWf5Fct9fi~"
     default:
       $ref: "../../responses/UnexpectedError.yml"
