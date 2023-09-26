@@ -15,7 +15,7 @@ transmute controller create \
 --output 'app/.well-known/did.json/did.json'
 
 
-echo "PRIVATE_KEY_JWK='$(jq -r tostring scripts/private.signing.jwk.json)'" > .env
+echo "PRIVATE_KEY_JWK=$(jq -r tostring scripts/private.signing.jwk.json)" > .env
 
-
-vercel env add PRIVATE_KEY_JWK production < .env
+vercel env rm PRIVATE_KEY_JWK production -y
+vercel env add PRIVATE_KEY_JWK production < scripts/private.signing.jwk.json

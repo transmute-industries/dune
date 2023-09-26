@@ -8,26 +8,26 @@
   "id": "did:web:dune.did.ai",
   "verificationMethod": [
     {
-      "id": "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:I0kqszXuwA33SPwp4bO_npApD4DhWoDx51PUeRigbfo",
+      "id": "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:nar2KZJM15fbsTOZMPTWZlr-0q2qeQrGHLmZQFR5c3I",
       "type": "JsonWebKey",
       "controller": "did:web:dune.did.ai",
       "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:I0kqszXuwA33SPwp4bO_npApD4DhWoDx51PUeRigbfo",
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:nar2KZJM15fbsTOZMPTWZlr-0q2qeQrGHLmZQFR5c3I",
         "kty": "EC",
         "crv": "P-384",
         "alg": "ES384",
-        "x": "zF3pqks43qXYT-cbcUQwMb8_wOtP9KgIzrjIJpbxS_Pq4wK-AYA6rMMydvXpH0NG",
-        "y": "OXeSCKrr1aJRBfzGyO-JfqALrORKBWnhuwHDWeqMAQ7QjWkeyEm4xu18t-NVjFLy"
+        "x": "f62S9NF7i-L7YwudsG7oVKObLWeFznUmtTx4N9Rpc26btrr8oqYEvd9d32C0fFLJ",
+        "y": "hRZ6qYydXjzEMcfPFpcNOb1652pmeIytFqIX5eOcI44B4fPyaeeXfVlfl34rqbGQ"
       }
     }
   ],
   "authentication": [
-    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:I0kqszXuwA33SPwp4bO_npApD4DhWoDx51PUeRigbfo"
+    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:nar2KZJM15fbsTOZMPTWZlr-0q2qeQrGHLmZQFR5c3I"
   ],
   "assertionMethod": [
-    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:I0kqszXuwA33SPwp4bO_npApD4DhWoDx51PUeRigbfo"
+    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:nar2KZJM15fbsTOZMPTWZlr-0q2qeQrGHLmZQFR5c3I"
   ],
   "keyAgreement": [
-    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:I0kqszXuwA33SPwp4bO_npApD4DhWoDx51PUeRigbfo"
+    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:nar2KZJM15fbsTOZMPTWZlr-0q2qeQrGHLmZQFR5c3I"
   ]
 }
