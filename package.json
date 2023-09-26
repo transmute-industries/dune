@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "shove": "git add -A; git commit -m ':rocket:'; git push origin main"
   },
   "dependencies": {
     "next": "latest",

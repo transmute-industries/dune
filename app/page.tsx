@@ -1,5 +1,10 @@
 
-import RapiDocReact from '../components/RapiDocReact'
+
+import dynamic from 'next/dynamic'
+
+const RapiDocReact = dynamic(() => import('../components/RapiDocReact'), {
+    ssr: false
+})
 
 export default function Home() {
   return (

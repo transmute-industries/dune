@@ -1,3 +1,5 @@
+# See also https://github.com/transmute-industries/transmute/tree/main/examples
+
 transmute key generate \
 --alg ES384 \
 --output scripts/private.signing.jwk.json
