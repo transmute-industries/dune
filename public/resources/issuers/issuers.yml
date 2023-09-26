@@ -11,7 +11,7 @@ get:
     - name: identifier
       in: path
       required: true
-      example: "did:web:vendor.transparency.example"
+      example: "did:web:dune.did.ai"
       schema:
         type: string
   responses:

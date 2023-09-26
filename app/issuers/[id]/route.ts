@@ -1,20 +1,21 @@
 import { NextResponse } from 'next/server'
- 
-export async function GET(request: Request) {
-  // const { searchParams } = new URL(request.url)
-  // const id = searchParams.get('id')
-  // const res = await fetch(`https://data.mongodb-api.com/product/${id}`, {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'API-Key': process.env.DATA_API_KEY,
-  //   },
-  // })
-  // const product = await res.json()
 
-  console.log(request)
-  const doc = {
-    hello: 1
+import did from '../../../services/did'
+
+export type GetIssuerControllerParams = {
+  params: {
+    id: string
   }
- 
-  return NextResponse.json(doc)
+}
+
+export async function GET(request: Request, { params }: GetIssuerControllerParams) {
+  const {id} = params
+  try{
+    const doc = await did.web.resolve(id)
+    return NextResponse.json(doc)
+  } catch(e){
+    return NextResponse.json({type: 'Resolution Failed', detail: 'Resolution Failed' }, {
+      status: 500,
+    })
+  }
 }

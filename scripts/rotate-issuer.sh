@@ -10,5 +10,6 @@ transmute key export \
 
 transmute controller create \
 --accept 'application/did+ld+json' \
+--id     'did:web:dune.did.ai' \
 --input  'scripts/public.verifying.jwk.json' \
 --output 'app/.well-known/did.json/did.json'

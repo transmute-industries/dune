@@ -5,29 +5,29 @@
       "@vocab": "https://www.iana.org/assignments/jose#"
     }
   ],
-  "id": "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9",
+  "id": "did:web:dune.did.ai",
   "verificationMethod": [
     {
-      "id": "#0",
+      "id": "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:aCEI-YiwXwncR1QJ93zXKteAig3BKe3hvZpRxoX4aHo",
       "type": "JsonWebKey",
-      "controller": "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9",
+      "controller": "did:web:dune.did.ai",
       "publicKeyJwk": {
-        "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:lyu270Yj0D3GIc-kroW_3szFs0w4AV_kx97ubuXgA00",
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:aCEI-YiwXwncR1QJ93zXKteAig3BKe3hvZpRxoX4aHo",
         "kty": "EC",
         "crv": "P-384",
         "alg": "ES384",
-        "x": "wXZm4OK4aHY5_BmyiMZryL7XR0xAFceYrjOwa34vTIN80CtaIoOTwZYOXs46UqiM",
-        "y": "AUrg69Dk7sRQAP9SBMEHG0KM5aNMKwb47eel2WuvSBO76E44qlvDjr7V6O2M3eMN"
+        "x": "4mIjXUHpDIw8c2576_J6MDCZl5oHceUPz03ieDS-zhO0-Z9LIgDaBE6NLo8ycQy-",
+        "y": "NyOb_Ds2sZJ9ip2etArZszMkBMF4xv6x_nv6LEmunNjnmtt7-LB9m56xqgpjpcUH"
       }
     }
   ],
   "authentication": [
-    "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9"
+    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:aCEI-YiwXwncR1QJ93zXKteAig3BKe3hvZpRxoX4aHo"
   ],
   "assertionMethod": [
-    "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9"
+    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:aCEI-YiwXwncR1QJ93zXKteAig3BKe3hvZpRxoX4aHo"
   ],
   "keyAgreement": [
-    "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9"
+    "did:web:dune.did.ai#urn:ietf:params:oauth:jwk-thumbprint:sha-256:aCEI-YiwXwncR1QJ93zXKteAig3BKe3hvZpRxoX4aHo"
   ]
 }
