@@ -1,12 +1,13 @@
 import { issue, disclose, verify } from "./sd"
 import { setIssuer } from './setIssuer'
 
-const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
-const { d, ...publicKeyJwk } = secretKeyJwk
-
 const issuer = {
-  jwks: {
-    keys: [publicKeyJwk]
+  jwks: () => {
+    const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
+    const { d, ...publicKeyJwk } = secretKeyJwk
+    return {
+      keys: [publicKeyJwk]
+    }
   }
 }
 
