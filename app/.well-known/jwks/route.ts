@@ -1,9 +1,12 @@
 import { NextResponse } from 'next/server'
 
-import vc from '../../../services/vc'
 
 export async function GET(request: Request) {
-  return NextResponse.json(vc.issuer.jwks())
+  const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
+  const { d, ...publicKeyJwk } = secretKeyJwk
+  return NextResponse.json({
+    keys: [publicKeyJwk]
+  })
 }
 
 // forces the route handler to be dynamic
