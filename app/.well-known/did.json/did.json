@@ -1,0 +1,33 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    {
+      "@vocab": "https://www.iana.org/assignments/jose#"
+    }
+  ],
+  "id": "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9",
+  "verificationMethod": [
+    {
+      "id": "#0",
+      "type": "JsonWebKey",
+      "controller": "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9",
+      "publicKeyJwk": {
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:lyu270Yj0D3GIc-kroW_3szFs0w4AV_kx97ubuXgA00",
+        "kty": "EC",
+        "crv": "P-384",
+        "alg": "ES384",
+        "x": "wXZm4OK4aHY5_BmyiMZryL7XR0xAFceYrjOwa34vTIN80CtaIoOTwZYOXs46UqiM",
+        "y": "AUrg69Dk7sRQAP9SBMEHG0KM5aNMKwb47eel2WuvSBO76E44qlvDjr7V6O2M3eMN"
+      }
+    }
+  ],
+  "authentication": [
+    "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9"
+  ],
+  "assertionMethod": [
+    "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9"
+  ],
+  "keyAgreement": [
+    "did:jwk:eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpseXUyNzBZajBEM0dJYy1rcm9XXzNzekZzMHc0QVZfa3g5N3VidVhnQTAwIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6IndYWm00T0s0YUhZNV9CbXlpTVpyeUw3WFIweEFGY2VZcmpPd2EzNHZUSU44MEN0YUlvT1R3WllPWHM0NlVxaU0iLCJ5IjoiQVVyZzY5RGs3c1JRQVA5U0JNRUhHMEtNNWFOTUt3YjQ3ZWVsMld1dlNCTzc2RTQ0cWx2RGpyN1Y2TzJNM2VNTiJ9"
+  ]
+}

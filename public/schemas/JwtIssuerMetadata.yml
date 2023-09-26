@@ -1,0 +1,16 @@
+title: JSON Web Token Issuer Metadata
+description: https://www.ietf.org/id/draft-terbu-sd-jwt-vc-02.html#section-5.2
+type: object
+properties:
+  issuer:
+    type: string
+    example: 'https://vendor.transparency.example'
+  jwks_uri:
+    type: string
+    example: 'https://vendor.transparency.example/.well-known/jwks'
+additionalProperties: True
+example:
+  {
+    "issuer":"https://vendor.transparency.example",
+    "jwks_uri":"https://vendor.transparency.example/.well-known/jwks"
+  }

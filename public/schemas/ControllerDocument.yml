@@ -1,0 +1,32 @@
+title: Controller Document
+type: object
+properties:
+  id:
+    type: string
+    example: 'did:web:vendor.transparency.example'
+additionalProperties: True
+example:
+  {
+    "id": "did:web:vendor.transparency.example",
+    "verificationMethod": [
+    {
+      "id": "did:web:vendor.transparency.example#urn:ietf:params:oauth:jwk-thumbprint:sha-256:NzbLsXh8uDCcd-6MNwXF4W_7noWXFZAfHkxZsRGC9Xs",
+      "type": "JsonWebKey",
+      "controller": "did:web:vendor.transparency.example",
+      "publicKeyJwk": {
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:NzbLsXh8uDCcd-6MNwXF4W_7noWXFZAfHkxZsRGC9Xs",
+        "kty": "EC",
+        "crv": "P-384",
+        "alg": "ES384",
+        "x": "NbaI-0w2h8nUxN2mJnD_Ozq9q3E5KEuCg22p5WD0bW5g7u8izXOS0ANuQA7_xxG0",
+        "y": "HmWJgIq4tfkVQkpMYRgp7yQyI20t9R6_wDI9CqYzF1Hy5AKIxRRXeWJN4ZNHa10P"
+      }
+    }
+  ],
+  "assertionMethod": [
+    "did:web:vendor.transparency.example#urn:ietf:params:oauth:jwk-thumbprint:sha-256:NzbLsXh8uDCcd-6MNwXF4W_7noWXFZAfHkxZsRGC9Xs"
+  ],
+  "authentication": [
+    "did:web:vendor.transparency.example#urn:ietf:params:oauth:jwk-thumbprint:sha-256:NzbLsXh8uDCcd-6MNwXF4W_7noWXFZAfHkxZsRGC9Xs"
+  ]
+  }

@@ -1,0 +1,25 @@
+
+get:
+  summary: Issuer
+  operationId: resolveIssuer
+  tags:
+    - Identifiers
+  security:
+    - OAuth2:
+        - 'issuers:resolve'
+  parameters:
+    - name: identifier
+      in: path
+      required: true
+      example: "did:web:vendor.transparency.example"
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/ControllerDocument.yml"
+    default:
+      $ref: "../../responses/UnexpectedError.yml"

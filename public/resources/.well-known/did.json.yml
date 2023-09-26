@@ -1,0 +1,15 @@
+summary: Controller Document
+get:
+  summary: Controller Document
+  operationId: getTransparencyServiceControllerDocument
+  tags:
+    - Discovery
+  responses:
+    "200":
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/ControllerDocument.yml"
+    default:
+      $ref: "../../responses/UnexpectedError.yml"

@@ -1,0 +1,38 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Open API for W3C Verifiable Credentials v2.0
+  description: Work in progress
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: http://localhost:3000
+
+tags:
+  - name: Discovery
+  - name: Identifiers
+  
+paths:
+  
+  /.well-known/jwt-issuer:
+    $ref: './resources/.well-known/jwt-issuer.yml'
+  /.well-known/jwks:
+    $ref: './resources/.well-known/jwks.yml'
+  /.well-known/did.json:
+    $ref: './resources/.well-known/did.json.yml'
+
+  /issuers/{identifier}:
+    $ref: './resources/issuers/issuers.yml'
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            'issuers:resolve': Grants permission to resolve an issuer's controller document
+            

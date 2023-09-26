@@ -1,0 +1,22 @@
+title: JSON Web Key Set
+description: https://www.ietf.org/id/draft-terbu-sd-jwt-vc-02.html#section-5.2
+type: object
+properties:
+  keys:
+    type: array
+    items:
+      type: object
+additionalProperties: True
+example:
+  {
+    "keys":[
+        {
+        "kid": "urn:ietf:params:oauth:jwk-thumbprint:sha-256:NzbLsXh8uDCcd-6MNwXF4W_7noWXFZAfHkxZsRGC9Xs",
+        "kty": "EC",
+        "crv": "P-384",
+        "alg": "ES384",
+        "x": "NbaI-0w2h8nUxN2mJnD_Ozq9q3E5KEuCg22p5WD0bW5g7u8izXOS0ANuQA7_xxG0",
+        "y": "HmWJgIq4tfkVQkpMYRgp7yQyI20t9R6_wDI9CqYzF1Hy5AKIxRRXeWJN4ZNHa10P"
+      }
+    ]
+  }
