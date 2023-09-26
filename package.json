@@ -10,9 +10,11 @@
     "shove": "git add -A; git commit -m ':rocket:'; git push origin main"
   },
   "dependencies": {
+    "@transmute/did-transmute": "^0.0.3",
     "@transmute/vc-jwt-sd": "^0.0.5",
     "axios": "^1.5.0",
     "jose": "^4.14.6",
+    "moment": "^2.29.4",
     "next": "latest",
     "rapidoc": "^9.3.4",
     "react": "latest",

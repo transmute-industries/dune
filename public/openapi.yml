@@ -8,9 +8,9 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - url: https://dune.did.ai
   - url: http://localhost:3000
-
+  - url: https://dune.did.ai
+  
 tags:
   - name: Discover
   - name: Internal
@@ -26,6 +26,8 @@ paths:
 
   /issuers/{identifier}:
     $ref: './resources/issuers/issuers.yml'
+  /status-list/{identifier}:
+    $ref: './resources/status-list/list.yml'
     
   /internal/issue:
     $ref: './resources/internal/issue.yml'

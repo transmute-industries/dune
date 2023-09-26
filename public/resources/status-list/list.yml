@@ -1,0 +1,27 @@
+
+
+
+get:
+  summary: Status List
+  operationId: resolveStatusList
+  tags:
+    - Discover
+  security:
+    - OAuth2:
+        - 'status-list:resolve'
+  parameters:
+    - name: identifier
+      in: path
+      required: true
+      example: "urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387"
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            type: string
+    default:
+      $ref: "../../responses/UnexpectedError.yml"
