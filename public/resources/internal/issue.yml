@@ -1,0 +1,54 @@
+
+post:
+  summary: Issue
+  operationId: issueCredential
+  tags:
+    - Internal
+  security:
+    - OAuth2:
+        - 'credentials:issue'
+  requestBody:
+    description: Optional description in *Markdown*
+    required: true
+    content:
+      application/json:
+        schema:
+          type: string
+          example: |-
+            "@context":
+              - https://www.w3.org/ns/credentials/v2
+              - https://www.w3.org/ns/credentials/examples/v2
+            id: http://university.example/credentials/3732
+            type:
+              - VerifiableCredential
+              - ExampleDegreeCredential
+            issuer:
+              id: https://university.example/issuers/565049
+              name:
+                - value: test value 0
+                  lang: en
+                - !sd
+                  value: test value 1
+                  lang: en
+                - value: test value 2
+                  lang: en
+                - !sd
+                  value: test value 3
+                  lang: en
+                - value: test value 4
+                  lang: en
+            validFrom: 2015-05-10T12:30:00Z
+            credentialSubject:
+              id: did:example:ebfeb1f712ebc6f1c276e12ec21
+              degree:
+                type: ExampleBachelorDegree
+                subtype: Bachelor of Science and Arts     
+  responses:
+    "200":
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Token.yml"
+    default:
+      $ref: "../../responses/UnexpectedError.yml"

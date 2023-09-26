@@ -3,7 +3,7 @@ get:
   summary: JWT Issuer Metadata
   operationId: getTransparencyServiceJwtIssuerMetadata
   tags:
-    - Discovery
+    - Discover
   responses:
     "200":
       description: Expected response to a valid request

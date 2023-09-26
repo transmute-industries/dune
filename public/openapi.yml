@@ -9,10 +9,11 @@ info:
 
 servers:
   - url: http://localhost:3000
+  - url: https://dune.did.ai
 
 tags:
-  - name: Discovery
-  - name: Identifiers
+  - name: Discover
+  - name: Internal
   
 paths:
   
@@ -25,6 +26,13 @@ paths:
 
   /issuers/{identifier}:
     $ref: './resources/issuers/issuers.yml'
+    
+  /internal/issue:
+    $ref: './resources/internal/issue.yml'
+  /internal/disclose:
+    $ref: './resources/internal/disclose.yml'
+  /internal/verify:
+    $ref: './resources/internal/verify.yml'
 
 components:
   securitySchemes:

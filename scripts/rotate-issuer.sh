@@ -13,3 +13,9 @@ transmute controller create \
 --id     'did:web:dune.did.ai' \
 --input  'scripts/public.verifying.jwk.json' \
 --output 'app/.well-known/did.json/did.json'
+
+
+echo "PRIVATE_KEY_JWK='$(jq -r tostring scripts/private.signing.jwk.json)'" > .env
+
+
+vercel env add PRIVATE_KEY_JWK production < .env

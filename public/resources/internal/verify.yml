@@ -1,0 +1,33 @@
+
+post:
+  summary: Verify
+  operationId: verifyCredential
+  tags:
+    - Internal
+  security:
+    - OAuth2:
+        - 'credentials:verify'
+  requestBody:
+    description: Optional description in *Markdown*
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            token:
+              type: string
+          example:
+            {
+              "token": "eyJhbGciOiJFUzM4NCJ9.eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvdjIiLCJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvZXhhbXBsZXMvdjIiXSwiaWQiOiJodHRwOi8vdW5pdmVyc2l0eS5leGFtcGxlL2NyZWRlbnRpYWxzLzM3MzIiLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIiwiRXhhbXBsZURlZ3JlZUNyZWRlbnRpYWwiXSwiaXNzdWVyIjp7ImlkIjoiZGlkOndlYjpkdW5lLmRpZC5haSIsIm5hbWUiOlt7InZhbHVlIjoidGVzdCB2YWx1ZSAwIiwibGFuZyI6ImVuIn0seyIuLi4iOiJLcnJ1bG9jM2ZuOG1fa3ptOWRkOGRLbmUxc2h3OTBfSUhqYjdPQWpaVGM0In0seyJ2YWx1ZSI6InRlc3QgdmFsdWUgMiIsImxhbmciOiJlbiJ9LHsiLi4uIjoiQkR5M1JuM0hOei1TamxMVDJrOFdxblQ2czl5eHYtUEplX2t6aDZyWGt1byJ9LHsidmFsdWUiOiJ0ZXN0IHZhbHVlIDQiLCJsYW5nIjoiZW4ifV19LCJ2YWxpZEZyb20iOiIyMDE1LTA1LTEwVDEyOjMwOjAwWiIsImNyZWRlbnRpYWxTdWJqZWN0Ijp7ImlkIjoiZGlkOmV4YW1wbGU6ZWJmZWIxZjcxMmViYzZmMWMyNzZlMTJlYzIxIiwiZGVncmVlIjp7InR5cGUiOiJFeGFtcGxlQmFjaGVsb3JEZWdyZWUiLCJzdWJ0eXBlIjoiQmFjaGVsb3Igb2YgU2NpZW5jZSBhbmQgQXJ0cyJ9fSwiX3NkX2FsZyI6InNoYS0yNTYifQ.nAN4hkQnQ0tD3b03Sh8yJIkrO2KCl4pNwuDZ79WZyq_--c3mCO4XODtIG-2vPXiZPyS5L9v3g_PZYQJPeJISIZoy4sky5FbyYUc2OERhAH40NCxAUA2s46TwfMk0Yx8f~WyJIdUFXX0QzT09iNUtDSU9xS0J3WW1BIiwgeyJ2YWx1ZSI6ICJ0ZXN0IHZhbHVlIDMiLCAibGFuZyI6ICJlbiJ9XQ"
+            }
+               
+  responses:
+    "200":
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../../schemas/Verification.yml"
+    default:
+      $ref: "../../responses/UnexpectedError.yml"

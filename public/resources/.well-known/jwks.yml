@@ -3,7 +3,7 @@ get:
   summary: JSON Web Key Set
   operationId: getTransparencyServiceJsonWebKeySet
   tags:
-    - Discovery
+    - Discover
   responses:
     "200":
       description: Expected response to a valid request
