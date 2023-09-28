@@ -12,20 +12,23 @@
   "dependencies": {
     "@transmute/did-transmute": "^0.0.3",
     "@transmute/vc-jwt-sd": "^0.0.5",
+    "@vercel/kv": "^0.2.3",
     "axios": "^1.5.0",
-    "jose": "^4.14.6",
     "moment": "^2.29.4",
     "next": "latest",
     "rapidoc": "^9.3.4",
     "react": "latest",
     "react-dom": "latest",
-    "yaml": "^2.3.2"
+    "yaml": "^2.3.2",
+    "pako": "^2.1.0",
+    "jose": "^4.14.6"
   },
   "devDependencies": {
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "dotenv": "^16.3.1",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
