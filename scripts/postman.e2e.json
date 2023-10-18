@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "232042fe-1b99-402c-8ff8-a7e2cefa4611",
+		"name": "API Walkthrough",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Issuer Metadata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should identify issuer\", function () {",
+							"    pm.expect(responseJson.issuer).to.be.a('string');",
+							"});",
+							"",
+							"pm.test(\"Status test\", function () {",
+							"    pm.expect(responseJson.jwks_uri).to.be.a('string');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/.well-known/jwt-issuer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						".well-known",
+						"jwt-issuer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Credential Status List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return an SD-JWT\", function () {",
+							"    pm.expect(responseJson.split('.').length).to.eql(3)",
+							"    pm.expect(responseJson.split('~').length).to.eql(2)",
+							"    let [jwtHeader, jwtPayload, jwtSignatureAndDisclosures] = responseJson.split('.')",
+							"    let protectedHeader = JSON.parse(atob(jwtHeader))",
+							"    let claimset = JSON.parse(atob(jwtPayload))",
+							"    pm.expect(protectedHeader['alg']).to.eql('ES384')",
+							"    pm.expect(claimset['@context']).to.eql(['https://www.w3.org/ns/credentials/v2'])",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"status-list",
+						"urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Issue Credential",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return JSON containing a token\", function () {",
+							"    pm.expect(responseJson.token).to.be.a('string');",
+							"    let token = responseJson.token;",
+							"    pm.expect(token.split('.').length).to.eql(3)",
+							"    pm.expect(token.split('~').length).to.eql(3) // multiple disclosures..",
+							"    let [jwtHeader, jwtPayload, jwtSignatureAndDisclosures] = token.split('.')",
+							"    let protectedHeader = JSON.parse(atob(jwtHeader))",
+							"    let claimset = JSON.parse(atob(jwtPayload))",
+							"    pm.expect(protectedHeader['alg']).to.eql('ES384')",
+							"    pm.expect(claimset['@context'][0]).to.eql('https://www.w3.org/ns/credentials/v2')",
+							"    pm.collectionVariables.set(\"issuance_token\", token);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"@context\":\n    - https://www.w3.org/ns/credentials/v2\n    - https://www.w3.org/ns/credentials/examples/v2\nid: http://university.example/credentials/3732\ntype:\n    - VerifiableCredential\n    - ExampleDegreeCredential\nissuer:\n  id: https://university.example/issuers/565049\n  name:\n  - value: test value 0\n    lang: en\n  - !sd\n    value: test value 1\n    lang: en\n  - value: test value 2\n    lang: en\n  - !sd\n    value: test value 3\n    lang: en\n  - value: test value 4\n    lang: en\nvalidFrom: 2015-05-10T12:30:00Z\ncredentialStatus:\n  - id: https://dune.did.ai/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387#0\n    type: StatusList2021Entry\n    statusPurpose: revocation\n    statusListIndex: \"0\"\n    statusListCredential: https://dune.did.ai/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387\ncredentialSchema:\n  - id: https://dune.did.ai/schemas/VerifiableCredential.yml\n    type: JsonSchema\ncredentialSubject:\n  id: did:example:ebfeb1f712ebc6f1c276e12ec21\n  degree:\n    type: ExampleBachelorDegree\n    subtype: Bachelor of Science and Arts",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/internal/issue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"internal",
+						"issue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Credential",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return JSON verification result\", function () {",
+							"    const { protectedHeader, claimset } = responseJson;",
+							"    pm.expect(protectedHeader['alg']).to.eql('ES384');",
+							"    pm.expect(claimset['@context'][0]).to.eql('https://www.w3.org/ns/credentials/v2');",
+							"    pm.collectionVariables.set(\"issuance_token_verification\", JSON.stringify(responseJson));",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"{{issuance_token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/internal/verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"internal",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Revoke Position 0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return an SD-JWT\", function () {",
+							"    pm.expect(responseJson.split('.').length).to.eql(3)",
+							"    pm.expect(responseJson.split('~').length).to.eql(2)",
+							"    let [jwtHeader, jwtPayload, jwtSignatureAndDisclosures] = responseJson.split('.')",
+							"    let protectedHeader = JSON.parse(atob(jwtHeader))",
+							"    let claimset = JSON.parse(atob(jwtPayload))",
+							"    pm.expect(protectedHeader['alg']).to.eql('ES384')",
+							"    pm.expect(claimset['@context']).to.eql(['https://www.w3.org/ns/credentials/v2'])",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": 0,\n    \"value\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"status-list",
+						"urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ensure Revocation Succeeded",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return JSON validation result\", function () {",
+							"    const { issuer, validityPeriod, credentialSchema, credentialStatus } = responseJson;",
+							"    pm.expect(issuer.valid).to.eql(true);",
+							"    pm.expect(validityPeriod.valid).to.eql(true);",
+							"    pm.expect(credentialSchema.valid).to.eql(true);",
+							"    pm.expect(credentialStatus.valid).to.eql(false);",
+							"",
+							"  ",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{issuance_token_verification}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/internal/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"internal",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Un-revoke Position 0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return an SD-JWT\", function () {",
+							"    pm.expect(responseJson.split('.').length).to.eql(3)",
+							"    pm.expect(responseJson.split('~').length).to.eql(2)",
+							"    let [jwtHeader, jwtPayload, jwtSignatureAndDisclosures] = responseJson.split('.')",
+							"    let protectedHeader = JSON.parse(atob(jwtHeader))",
+							"    let claimset = JSON.parse(atob(jwtPayload))",
+							"    pm.expect(protectedHeader['alg']).to.eql('ES384')",
+							"    pm.expect(claimset['@context']).to.eql(['https://www.w3.org/ns/credentials/v2'])",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"position\": 0,\n    \"value\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"status-list",
+						"urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ensure Credential is Not Revoked",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return JSON validation result\", function () {",
+							"    const { issuer, validityPeriod, credentialSchema, credentialStatus } = responseJson;",
+							"    pm.expect(issuer.valid).to.eql(true);",
+							"    pm.expect(validityPeriod.valid).to.eql(true);",
+							"    pm.expect(credentialSchema.valid).to.eql(true);",
+							"    pm.expect(credentialStatus.valid).to.eql(true);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{issuance_token_verification}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/internal/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"internal",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "issuance_token",
+			"value": ""
+		},
+		{
+			"key": "issuance_token_verification",
+			"value": ""
+		}
+	]
+}
