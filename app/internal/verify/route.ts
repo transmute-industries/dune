@@ -9,7 +9,6 @@ export async function POST(request: Request) {
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   const {d, ...publicKeyJwk} = secretKeyJwk
 
-  console.log(JSON.stringify(transmute.vc.sd.Parse.compact(token), null, 2))
   try{
     const verification =  await transmute.vc.sd.verifier({
       resolver: {
