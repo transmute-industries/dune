@@ -1,14 +1,17 @@
 import { NextResponse } from 'next/server'
 
-import sd from '@transmute/vc-jwt-sd'
+import transmute from '@transmute/verifiable-credentials'
 
 
 export async function POST(request: Request) {
-  const { token } = await request.json();
+  const { audience, nonce, token } = await request.json();
+
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   const {d, ...publicKeyJwk} = secretKeyJwk
+
+  console.log(JSON.stringify(transmute.vc.sd.Parse.compact(token), null, 2))
   try{
-    const verification =  await sd.verifier({
+    const verification =  await transmute.vc.sd.verifier({
       resolver: {
         resolve: async (kid: string) => {
           if (kid === `did:web:dune.did.ai#${publicKeyJwk.kid}`){
@@ -18,6 +21,8 @@ export async function POST(request: Request) {
         }
       }
     }).verify({
+      audience, 
+      nonce,
       token
     })
     return NextResponse.json(verification)

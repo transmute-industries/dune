@@ -1,16 +1,25 @@
 import { NextResponse } from 'next/server'
 
-import vc from '../../../services/vc'
+import transmute from '@transmute/verifiable-credentials';
 
 export async function POST(request: Request) {
-  const holder = 'did:web:dune.did.ai'
-  const { token, disclosure } = await request.json();
-  console.log(JSON.stringify({token, disclosure}, null, 2))
-  try{
-    const disclosedToken =  await vc.disclose(holder, token, disclosure)
+  const { audience, nonce, token, disclosure } = await request.json();
+  const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
+  try {
+    const disclosedToken = await transmute.vc.sd.holder({
+      kid: `did:web:dune.did.ai#${secretKeyJwk.kid}`,
+      secretKeyJwk
+    })
+    .issue({
+      audience,
+      nonce,
+      token,
+      disclosure
+    })
     return NextResponse.json({ token: disclosedToken })
-  } catch(e){
-    return NextResponse.json({type: 'Disclosure Failed', detail: 'Disclosure Failed' }, {
+  } catch (e) {
+    console.error(e)
+    return NextResponse.json({ type: 'Disclosure Failed', detail: 'Disclosure Failed' }, {
       status: 500,
     })
   }

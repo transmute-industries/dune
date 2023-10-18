@@ -155,6 +155,65 @@
 			"response": []
 		},
 		{
+			"name": "Disclose Credential",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
+							"pm.test(\"should have status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"should return JSON containing a token\", function () {",
+							"    pm.expect(responseJson.token).to.be.a('string');",
+							"    let token = responseJson.token;",
+							"    pm.expect(token.split('.').length).to.eql(5) // key binding token present",
+							"    pm.expect(token.split('~').length).to.eql(3) // less disclosures",
+							"    let [jwtHeader, jwtPayload, jwtSignatureAndDisclosures] = token.split('.')",
+							"    let protectedHeader = JSON.parse(atob(jwtHeader))",
+							"    let claimset = JSON.parse(atob(jwtPayload))",
+							"    pm.expect(protectedHeader['alg']).to.eql('ES384')",
+							"    pm.expect(claimset['@context'][0]).to.eql('https://www.w3.org/ns/credentials/v2')",
+							"    pm.collectionVariables.set(\"disclosed_token\", token);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"audience\": \"aud-123\",\n    \"nonce\": \"nonce-456\",\n    \"token\": \"{{issuance_token}}\",\n    \"disclosure\": \"\\n\\\"@context\\\":\\n  - https://www.w3.org/ns/credentials/v2\\n  - https://www.w3.org/ns/credentials/examples/v2\\nid: http://university.example/credentials/3732\\ntype:\\n  - VerifiableCredential\\n  - ExampleDegreeCredential\\nissuer:\\n  id: did:web:dune.did.ai\\n  name:\\n    - value: test value 0\\n      lang: en\\n    - False\\n    - value: test value 2\\n      lang: en\\n    - True\\n    - value: test value 4\\n      lang: en\\nvalidFrom: 2015-05-10T12:30:00Z\\ncredentialSubject:\\n  id: did:example:ebfeb1f712ebc6f1c276e12ec21\\n  degree:\\n    type: ExampleBachelorDegree\\n    subtype: Bachelor of Science and Arts\\n\"\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/internal/disclose",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"internal",
+						"disclose"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Verify Credential",
 			"event": [
 				{
@@ -171,7 +230,7 @@
 							"    const { protectedHeader, claimset } = responseJson;",
 							"    pm.expect(protectedHeader['alg']).to.eql('ES384');",
 							"    pm.expect(claimset['@context'][0]).to.eql('https://www.w3.org/ns/credentials/v2');",
-							"    pm.collectionVariables.set(\"issuance_token_verification\", JSON.stringify(responseJson));",
+							"    pm.collectionVariables.set(\"verified_presentation\", JSON.stringify(responseJson));",
 							"});",
 							"",
 							""
@@ -185,7 +244,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"token\": \"{{issuance_token}}\"\n}",
+					"raw": "{\n    \"audience\": \"aud-123\",\n    \"nonce\": \"nonce-456\",\n    \"token\": \"{{disclosed_token}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -297,7 +356,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{{issuance_token_verification}}",
+					"raw": "{{verified_presentation}}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -407,7 +466,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{{issuance_token_verification}}",
+					"raw": "{{verified_presentation}}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -437,6 +496,14 @@
 		},
 		{
 			"key": "issuance_token_verification",
+			"value": ""
+		},
+		{
+			"key": "disclosed_token",
+			"value": ""
+		},
+		{
+			"key": "verified_presentation",
 			"value": ""
 		}
 	]
