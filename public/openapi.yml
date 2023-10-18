@@ -8,7 +8,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - url: http://localhost:3000
+  # - url: http://localhost:3000
   - url: https://dune.did.ai
   
 tags:
