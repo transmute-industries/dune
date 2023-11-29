@@ -7,25 +7,72 @@ post:
   security:
     - OAuth2:
         - 'credentials:disclose'
+  parameters:
+    - in: query
+      required: true
+      name: audience
+      schema:
+        type: string
+      description: The audience for the disclosure
+      example: aud-123
+    - in: query
+      required: true
+      name: nonce
+      schema:
+        type: string
+      description: The nonce for the disclosure
+      example: nonce-456
+    - in: query
+      required: true
+      name: token
+      schema:
+        type: string
+      description: The token / credential to be disclosed
+      example: eyJhbGciOiJFUzM4NCIsImtpZCI6ImRpZDp3ZWI6ZHVuZS5kaWQuYWkjdXJuOmlldGY6cGFyYW1zOm9hdXRoOmp3ay10aHVtYnByaW50OnNoYS0yNTY6bmFyMktaSk0xNWZic1RPWk1QVFdabHItMHEycWVRckdITG1aUUZSNWMzSSJ9.eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvdjIiLCJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvZXhhbXBsZXMvdjIiXSwiaWQiOiJodHRwOi8vdW5pdmVyc2l0eS5leGFtcGxlL2NyZWRlbnRpYWxzLzM3MzIiLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIiwiRXhhbXBsZURlZ3JlZUNyZWRlbnRpYWwiXSwiaXNzdWVyIjp7ImlkIjoiaHR0cHM6Ly91bml2ZXJzaXR5LmV4YW1wbGUvaXNzdWVycy81NjUwNDkiLCJuYW1lIjpbeyJ2YWx1ZSI6InRlc3QgdmFsdWUgMCIsImxhbmciOiJlbiJ9LHsiLi4uIjoiTDMxNFBVZmxJUV9mcnB0bkU2enQwTVdtYmhCejY4VWpkUHgwREpUM0p3byJ9LHsidmFsdWUiOiJ0ZXN0IHZhbHVlIDIiLCJsYW5nIjoiZW4ifSx7Ii4uLiI6ImNGejBjem8tNUJrX2RIUXByUk1BS1ZQVW4yb09mMXJvclpHN191WGdwOHMifSx7InZhbHVlIjoidGVzdCB2YWx1ZSA0IiwibGFuZyI6ImVuIn1dfSwidmFsaWRGcm9tIjoiMjAxNS0wNS0xMFQxMjozMDowMFoiLCJjcmVkZW50aWFsU3RhdHVzIjpbeyJpZCI6Imh0dHBzOi8vZHVuZS5kaWQuYWkvc3RhdHVzLWxpc3QvdXJuOnV1aWQ6MzAwOGY5YmUtZWE5YS00YTkxLTg3MDctODRiNWQ0MDJhMzg3IzAiLCJ0eXBlIjoiU3RhdHVzTGlzdDIwMjFFbnRyeSIsInN0YXR1c1B1cnBvc2UiOiJyZXZvY2F0aW9uIiwic3RhdHVzTGlzdEluZGV4IjoiMCIsInN0YXR1c0xpc3RDcmVkZW50aWFsIjoiaHR0cHM6Ly9kdW5lLmRpZC5haS9zdGF0dXMtbGlzdC91cm46dXVpZDozMDA4ZjliZS1lYTlhLTRhOTEtODcwNy04NGI1ZDQwMmEzODcifV0sImNyZWRlbnRpYWxTY2hlbWEiOlt7ImlkIjoiaHR0cHM6Ly9kdW5lLmRpZC5haS9zY2hlbWFzL1ZlcmlmaWFibGVDcmVkZW50aWFsLnltbCIsInR5cGUiOiJKc29uU2NoZW1hIn1dLCJjcmVkZW50aWFsU3ViamVjdCI6eyJpZCI6ImRpZDpleGFtcGxlOmViZmViMWY3MTJlYmM2ZjFjMjc2ZTEyZWMyMSIsImRlZ3JlZSI6eyJ0eXBlIjoiRXhhbXBsZUJhY2hlbG9yRGVncmVlIiwic3VidHlwZSI6IkJhY2hlbG9yIG9mIFNjaWVuY2UgYW5kIEFydHMifX0sIl9zZF9hbGciOiJzaGEtMjU2IiwiY25mIjp7Imp3ayI6eyJraWQiOiJ1cm46aWV0ZjpwYXJhbXM6b2F1dGg6andrLXRodW1icHJpbnQ6c2hhLTI1NjpuYXIyS1pKTTE1ZmJzVE9aTVBUV1psci0wcTJxZVFyR0hMbVpRRlI1YzNJIiwia3R5IjoiRUMiLCJjcnYiOiJQLTM4NCIsImFsZyI6IkVTMzg0IiwieCI6ImY2MlM5TkY3aS1MN1l3dWRzRzdvVktPYkxXZUZ6blVtdFR4NE45UnBjMjZidHJyOG9xWUV2ZDlkMzJDMGZGTEoiLCJ5IjoiaFJaNnFZeWRYanpFTWNmUEZwY05PYjE2NTJwbWVJeXRGcUlYNWVPY0k0NEI0ZlB5YWVlWGZWbGZsMzRycWJHUSJ9fX0.4A1QJLlYMR-G2fJfKVUVpm0AlP7yMf9jQnGnodyJIgP8goQKKbW3N2P5Mn18Qf3mN1TS7HYm6k2XWEvlsGwPTxFW71CCr-aTU90nb486lQzpyPNuK2Qb5RGTOkN8hew1~WyJ6cVRBV2s5ZEN3QVptNDNYMGlELTN3IiwgeyJ2YWx1ZSI6ICJ0ZXN0IHZhbHVlIDEiLCAibGFuZyI6ICJlbiJ9XQ~WyJ3V3dIa3NnX3BvN2tXVko4UWUtRS1nIiwgeyJ2YWx1ZSI6ICJ0ZXN0IHZhbHVlIDMiLCAibGFuZyI6ICJlbiJ9XQ
   requestBody:
-    description: Optional description in *Markdown*
     required: true
+    description: Optional description in *Markdown*
     content:
-      application/json:
+      text/plain:
         schema:
-          type: object
-          properties:
-            token:
-              type: string
-            disclosure:
-              type: string
-          example:
-            {
-              "token": "eyJhbGciOiJFUzM4NCJ9.eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvdjIiLCJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvZXhhbXBsZXMvdjIiXSwiaWQiOiJodHRwOi8vdW5pdmVyc2l0eS5leGFtcGxlL2NyZWRlbnRpYWxzLzM3MzIiLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIiwiRXhhbXBsZURlZ3JlZUNyZWRlbnRpYWwiXSwiaXNzdWVyIjp7ImlkIjoiZGlkOndlYjpkdW5lLmRpZC5haSIsIm5hbWUiOlt7InZhbHVlIjoidGVzdCB2YWx1ZSAwIiwibGFuZyI6ImVuIn0seyIuLi4iOiJLcnJ1bG9jM2ZuOG1fa3ptOWRkOGRLbmUxc2h3OTBfSUhqYjdPQWpaVGM0In0seyJ2YWx1ZSI6InRlc3QgdmFsdWUgMiIsImxhbmciOiJlbiJ9LHsiLi4uIjoiQkR5M1JuM0hOei1TamxMVDJrOFdxblQ2czl5eHYtUEplX2t6aDZyWGt1byJ9LHsidmFsdWUiOiJ0ZXN0IHZhbHVlIDQiLCJsYW5nIjoiZW4ifV19LCJ2YWxpZEZyb20iOiIyMDE1LTA1LTEwVDEyOjMwOjAwWiIsImNyZWRlbnRpYWxTdWJqZWN0Ijp7ImlkIjoiZGlkOmV4YW1wbGU6ZWJmZWIxZjcxMmViYzZmMWMyNzZlMTJlYzIxIiwiZGVncmVlIjp7InR5cGUiOiJFeGFtcGxlQmFjaGVsb3JEZWdyZWUiLCJzdWJ0eXBlIjoiQmFjaGVsb3Igb2YgU2NpZW5jZSBhbmQgQXJ0cyJ9fSwiX3NkX2FsZyI6InNoYS0yNTYifQ.nAN4hkQnQ0tD3b03Sh8yJIkrO2KCl4pNwuDZ79WZyq_--c3mCO4XODtIG-2vPXiZPyS5L9v3g_PZYQJPeJISIZoy4sky5FbyYUc2OERhAH40NCxAUA2s46TwfMk0Yx8f~WyI3dUMwTXZZcDhEck5aUGR2YjZWQ2pRIiwgeyJ2YWx1ZSI6ICJ0ZXN0IHZhbHVlIDEiLCAibGFuZyI6ICJlbiJ9XQ~WyJIdUFXX0QzT09iNUtDSU9xS0J3WW1BIiwgeyJ2YWx1ZSI6ICJ0ZXN0IHZhbHVlIDMiLCAibGFuZyI6ICJlbiJ9XQ",
-              "disclosure": "\n\"@context\":\n  - https://www.w3.org/ns/credentials/v2\n  - https://www.w3.org/ns/credentials/examples/v2\nid: http://university.example/credentials/3732\ntype:\n  - VerifiableCredential\n  - ExampleDegreeCredential\nissuer:\n  id: did:web:dune.did.ai\n  name:\n    - value: test value 0\n      lang: en\n    - False\n    - value: test value 2\n      lang: en\n    - True\n    - value: test value 4\n      lang: en\nvalidFrom: 2015-05-10T12:30:00Z\ncredentialSubject:\n  id: did:example:ebfeb1f712ebc6f1c276e12ec21\n  degree:\n    type: ExampleBachelorDegree\n    subtype: Bachelor of Science and Arts\n"
-            }
-        
-              
+          type: string
+          example: |-
+            "@context":
+              - https://www.w3.org/ns/credentials/v2
+              - https://www.w3.org/ns/credentials/examples/v2
+            id: http://university.example/credentials/3732
+            type:
+              - VerifiableCredential
+              - ExampleDegreeCredential
+            issuer:
+              id: https://university.example/issuers/565049
+              name:
+                - value: test value 0
+                  lang: en
+                - True # disclose this value
+                - value: test value 2
+                  lang: en
+                - False # do not disclose this value
+                - value: test value 4
+                  lang: en
+            validFrom: 2015-05-10T12:30:00Z
+            credentialStatus:
+              - id: https://dune.did.ai/status-list/urn:uuid:d31ada5d-1d3d-4f68-8587-8ff9bb3038d6#0
+                type: StatusList2021Entry
+                statusPurpose: revocation
+                statusListIndex: "0"
+                statusListCredential: https://dune.did.ai/status-list/urn:uuid:d31ada5d-1d3d-4f68-8587-8ff9bb3038d6
+            credentialSchema:
+              - id: https://dune.did.ai/schemas/VerifiableCredential.yml
+                type: JsonSchema
+            credentialSubject:
+              id: did:example:ebfeb1f712ebc6f1c276e12ec21
+              degree:
+              type: ExampleBachelorDegree
+              subtype: Bachelor of Science and Arts
+
+
+                 
   responses:
     "200":
       description: Expected response to a valid request

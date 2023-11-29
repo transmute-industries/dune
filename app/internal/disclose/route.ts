@@ -3,7 +3,11 @@ import { NextResponse } from 'next/server'
 import transmute from '@transmute/verifiable-credentials';
 
 export async function POST(request: Request) {
-  const { audience, nonce, token, disclosure } = await request.json();
+  const disclosure = await request.text();
+  const url = new URL(request.url)
+  const token = url.searchParams.get('token') || ''
+  const audience = url.searchParams.get('audience') || ''
+  const nonce = url.searchParams.get('nonce') || ''
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   try {
     const disclosedToken = await transmute.vc.sd.holder({
