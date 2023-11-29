@@ -191,7 +191,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"audience\": \"aud-123\",\n    \"nonce\": \"nonce-456\",\n    \"token\": \"{{issuance_token}}\",\n    \"disclosure\": \"\\n\\\"@context\\\":\\n  - https://www.w3.org/ns/credentials/v2\\n  - https://www.w3.org/ns/credentials/examples/v2\\nid: http://university.example/credentials/3732\\ntype:\\n  - VerifiableCredential\\n  - ExampleDegreeCredential\\nissuer:\\n  id: did:web:dune.did.ai\\n  name:\\n    - value: test value 0\\n      lang: en\\n    - False\\n    - value: test value 2\\n      lang: en\\n    - True\\n    - value: test value 4\\n      lang: en\\nvalidFrom: 2015-05-10T12:30:00Z\\ncredentialSubject:\\n  id: did:example:ebfeb1f712ebc6f1c276e12ec21\\n  degree:\\n    type: ExampleBachelorDegree\\n    subtype: Bachelor of Science and Arts\\n\"\n}",
+					"raw": "\"@context\":\n  - https://www.w3.org/ns/credentials/v2\n  - https://www.w3.org/ns/credentials/examples/v2\nid: http://university.example/credentials/3732\ntype:\n  - VerifiableCredential\n  - ExampleDegreeCredential\nissuer:\n    id: https://university.example/issuers/565049\n    name:\n    - value: test value 0\n      lang: en\n    - True\n    - value: test value 2\n      lang: en\n    - False\n    - value: test value 4\n      lang: en\nvalidFrom: 2015-05-10T12:30:00Z\ncredentialStatus:\n    - id: https://dune.did.ai/status-list/urn:uuid:d31ada5d-1d3d-4f68-8587-8ff9bb3038d6#0\n      type: StatusList2021Entry\n      statusPurpose: revocation\n      statusListIndex: \"0\"\n      statusListCredential: https://dune.did.ai/status-list/urn:uuid:d31ada5d-1d3d-4f68-8587-8ff9bb3038d6\ncredentialSchema:\n    - id: https://dune.did.ai/schemas/VerifiableCredential.yml\n      type: JsonSchema\ncredentialSubject:\n    id: did:example:ebfeb1f712ebc6f1c276e12ec21\n    degree:\n    type: ExampleBachelorDegree\n    subtype: Bachelor of Science and Arts",
 					"options": {
 						"raw": {
 							"language": "text"
@@ -199,7 +199,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/internal/disclose",
+					"raw": "http://localhost:3000/internal/disclose?audience=aud-123&nonce=nonce-456&token={{issuance_token}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -208,6 +208,20 @@
 					"path": [
 						"internal",
 						"disclose"
+					],
+					"query": [
+						{
+							"key": "audience",
+							"value": "aud-123"
+						},
+						{
+							"key": "nonce",
+							"value": "nonce-456"
+						},
+						{
+							"key": "token",
+							"value": "{{issuance_token}}"
+						}
 					]
 				}
 			},
