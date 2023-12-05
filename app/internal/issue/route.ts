@@ -13,8 +13,7 @@ export async function POST(request: Request) {
     }).issue({
       holder: publicKeyJwk,
       claimset: disclosable
-    })
-  
+    })  
     return NextResponse.json({ token })
   } catch(e){
     return NextResponse.json({type: 'Issuance Failed', detail: 'Issuance Failed' }, {

@@ -3,8 +3,10 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
   const issuerMetadata = {
     "issuer": "did:web:dune.did.ai",
-    "jwks_uri": "https://dune.did.ai/.well-known/jwks"
-    }
+    "jwks_uri": "https://dune.did.ai/.well-known/jwks",
+    "audience": "https://dune.did.ai",
+    "challenge_endpoint": "ttps://dune.did.ai/.well-known/challenge"
+  }
   return NextResponse.json(issuerMetadata)
 }
 

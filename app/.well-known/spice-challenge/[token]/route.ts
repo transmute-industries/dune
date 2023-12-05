@@ -1,11 +1,17 @@
+import moment from 'moment'
 import { NextResponse } from 'next/server'
 
 import transmute from '@transmute/verifiable-credentials'
 
-import moment from 'moment';
+export type PostChallengeTokenParams = {
+  token: string
+}
 
-export async function POST(request: Request) {
-  const { nonce, token } = await request.json();
+export async function POST(request: Request, {params}: { params: PostChallengeTokenParams }) {
+
+
+  const challenge = params.token;
+
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   const {d, ...publicKeyJwk} = secretKeyJwk
   let audienceForChallenge = ''
@@ -20,7 +26,7 @@ export async function POST(request: Request) {
         }
       }
     }).verify({
-      token: nonce
+      token: challenge
     })
     const {iss, iat, exp, aud} = verifiedChallengeToken.claimset
     if (iss !== 'did:web:dune.did.ai') {
@@ -45,6 +51,7 @@ export async function POST(request: Request) {
   }
 
   try {
+    const token = await request.json();
     const verification =  await transmute.vc.sd.verifier({
       resolver: {
         resolve: async (kid: string) => {
@@ -56,10 +63,10 @@ export async function POST(request: Request) {
       }
     }).verify({
       audience: audienceForChallenge, 
-      nonce,
+      nonce: challenge,
       token
     })
-    return NextResponse.json(verification)
+    return NextResponse.json({message: "Challenge accepted"})
   } catch(e){
     console.error(e)
     return NextResponse.json({type: 'Verification Failed', detail: 'Verification Failed' }, {
@@ -67,3 +74,6 @@ export async function POST(request: Request) {
     })
   }
 }
+
+// forces the route handler to be dynamic
+export const dynamic = "force-dynamic";
