@@ -5,7 +5,7 @@ export async function GET(request: Request) {
     "issuer": "did:web:dune.did.ai",
     "jwks_uri": "https://dune.did.ai/.well-known/jwks",
     "audience": "https://dune.did.ai",
-    "challenge_endpoint": "ttps://dune.did.ai/.well-known/spice-challenge"
+    "challenge_endpoint": "https://dune.did.ai/.well-known/spice-challenge"
   }
   return NextResponse.json(issuerMetadata)
 }
