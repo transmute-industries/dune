@@ -8,10 +8,7 @@ export type PostChallengeTokenParams = {
 }
 
 export async function POST(request: Request, {params}: { params: PostChallengeTokenParams }) {
-
-
   const challenge = params.token;
-
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   const {d, ...publicKeyJwk} = secretKeyJwk
   let audienceForChallenge = ''

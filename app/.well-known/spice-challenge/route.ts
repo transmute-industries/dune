@@ -23,7 +23,6 @@ exp: ${exp}
   const newHeaders = new Headers(request.headers)
   newHeaders.set('Content-Type', 'application/sd-jwt')
   return new NextResponse(Buffer.from(token),  {
-    // New request headers
     headers: newHeaders,
   })
 }

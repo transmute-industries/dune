@@ -8,15 +8,6 @@ export async function POST(request: Request) {
   const token = url.searchParams.get('token') || ''
   const audience = url.searchParams.get('audience') || ''
   const nonce = url.searchParams.get('nonce') || ''
-  // console.log({
-  //   url: request.url,
-  //   token,
-  //   audience,
-  //   nonce,
-  //   disclosure
-  // })
-
- 
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   try {
     if (audience !== 'https://dune.did.ai'){
