@@ -4,13 +4,28 @@ import transmute from '@transmute/verifiable-credentials'
 
 import moment from 'moment';
 
+
+type VerifiedSpiceChallengeToken = {
+  protectedHeader: {
+    kid: string
+    alg: string
+  }
+  claimset: {
+    iss: string
+    iat: number
+    exp: number
+    aud: string
+  }
+}
+
+
 export async function POST(request: Request) {
   const { nonce, token } = await request.json();
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   const {d, ...publicKeyJwk} = secretKeyJwk
   let audienceForChallenge = ''
   try {
-    const verifiedChallengeToken =  await transmute.vc.sd.verifier({
+    const verifiedChallengeToken =  await transmute.vc.sd.verifier<VerifiedSpiceChallengeToken>({
       resolver: {
         resolve: async (kid: string) => {
           if (kid === `did:web:dune.did.ai#${publicKeyJwk.kid}`){
@@ -22,7 +37,7 @@ export async function POST(request: Request) {
     }).verify({
       token: nonce
     })
-    const {iss, iat, exp, aud} = verifiedChallengeToken.claimset
+    const {iss, iat, exp, aud} = verifiedChallengeToken.claimset;
     if (iss !== 'did:web:dune.did.ai') {
       throw new Error('Unknown challenge token issuer.')
     }

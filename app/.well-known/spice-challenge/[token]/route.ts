@@ -7,13 +7,26 @@ export type PostChallengeTokenParams = {
   token: string
 }
 
+type VerifiedSpiceChallengeToken = {
+  protectedHeader: {
+    kid: string
+    alg: string
+  }
+  claimset: {
+    iss: string
+    iat: number
+    exp: number
+    aud: string
+  }
+}
+
 export async function POST(request: Request, {params}: { params: PostChallengeTokenParams }) {
   const challenge = params.token;
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   const {d, ...publicKeyJwk} = secretKeyJwk
   let audienceForChallenge = ''
   try {
-    const verifiedChallengeToken =  await transmute.vc.sd.verifier({
+    const verifiedChallengeToken =  await transmute.vc.sd.verifier<VerifiedSpiceChallengeToken>({
       resolver: {
         resolve: async (kid: string) => {
           if (kid === `did:web:dune.did.ai#${publicKeyJwk.kid}`){
@@ -49,7 +62,7 @@ export async function POST(request: Request, {params}: { params: PostChallengeTo
 
   try {
     const token = await request.json();
-    const verification =  await transmute.vc.sd.verifier({
+    await transmute.vc.sd.verifier({
       resolver: {
         resolve: async (kid: string) => {
           if (kid === `did:web:dune.did.ai#${publicKeyJwk.kid}`){
