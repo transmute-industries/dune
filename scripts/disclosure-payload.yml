@@ -1,0 +1,33 @@
+"@context":
+  - https://www.w3.org/ns/credentials/v2
+  - https://www.w3.org/ns/credentials/examples/v2
+id: http://university.example/credentials/3732
+type:
+  - VerifiableCredential
+  - ExampleDegreeCredential
+issuer:
+  id: https://university.example/issuers/565049
+  name:
+    - value: test value 0
+      lang: en
+    - True # disclose this value
+    - value: test value 2
+      lang: en
+    - False # do not disclose this value
+    - value: test value 4
+      lang: en
+validFrom: 2015-05-10T12:30:00Z
+credentialStatus:
+  - id: https://dune.did.ai/status-list/urn:uuid:d31ada5d-1d3d-4f68-8587-8ff9bb3038d6#0
+    type: StatusList2021Entry
+    statusPurpose: revocation
+    statusListIndex: "0"
+    statusListCredential: https://dune.did.ai/status-list/urn:uuid:d31ada5d-1d3d-4f68-8587-8ff9bb3038d6
+credentialSchema:
+  - id: https://dune.did.ai/schemas/VerifiableCredential.yml
+    type: JsonSchema
+credentialSubject:
+  id: did:example:ebfeb1f712ebc6f1c276e12ec21
+  degree:
+  type: ExampleBachelorDegree
+  subtype: Bachelor of Science and Arts

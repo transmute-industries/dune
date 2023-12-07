@@ -1,9 +1,11 @@
+import moment from 'moment'
 import { NextResponse } from 'next/server'
 
 import transmute from '@transmute/verifiable-credentials'
 
-import moment from 'moment';
-
+export type PostChallengeTokenParams = {
+  token: string
+}
 
 type VerifiedSpiceChallengeToken = {
   protectedHeader: {
@@ -18,17 +20,18 @@ type VerifiedSpiceChallengeToken = {
   }
 }
 
-export async function POST(request: Request) {
-  const { nonce, token } = await request.json();
+export async function POST(request: Request, {params}: { params: PostChallengeTokenParams }) {
+  const challenge = params.token;
   const secretKeyJwk = JSON.parse(process.env.PRIVATE_KEY_JWK as string)
   const {d, ...publicKeyJwk} = secretKeyJwk
+
+  const isChallengeUnixTimestamp = !Number.isNaN(parseInt(challenge, 10))
   let audienceForChallenge = 'https://dune.did.ai'
-  let nonceForChallenge = nonce
-  const isChallengeUnixTimestamp = !Number.isNaN(parseInt(nonce, 10))
+  let nonceForChallenge = challenge
   if (isChallengeUnixTimestamp){
     // check time here
     const now = moment()
-    const nonceTime = moment.unix(nonce)
+    const nonceTime = moment.unix(parseInt(challenge, 10))
     // const nonceAge = nonceTime.fromNow()
     // console.log('Key binding token nonce age: ', nonceAge)
     if (now.isAfter(nonceTime.add(5, 'minutes'))){
@@ -46,9 +49,9 @@ export async function POST(request: Request) {
           }
         }
       }).verify({
-        token: nonce
+        token: challenge
       })
-      const {iss, iat, exp, aud} = verifiedChallengeToken.claimset;
+      const {iss, iat, exp, aud} = verifiedChallengeToken.claimset
       if (iss !== 'did:web:dune.did.ai') {
         throw new Error('Unknown challenge token issuer.')
       }
@@ -70,9 +73,11 @@ export async function POST(request: Request) {
       })
     }
   }
+  
 
   try {
-    const verification =  await transmute.vc.sd.verifier({
+    const token = await request.json();
+    await transmute.vc.sd.verifier({
       resolver: {
         resolve: async (kid: string) => {
           if (kid === `did:web:dune.did.ai#${publicKeyJwk.kid}`){
@@ -86,7 +91,7 @@ export async function POST(request: Request) {
       nonce: nonceForChallenge,
       token
     })
-    return NextResponse.json(verification)
+    return NextResponse.json({message: "Challenge accepted"})
   } catch(e){
     console.error(e)
     return NextResponse.json({type: 'Verification Failed', detail: 'Verification Failed' }, {
@@ -94,3 +99,6 @@ export async function POST(request: Request) {
     })
   }
 }
+
+// forces the route handler to be dynamic
+export const dynamic = "force-dynamic";
