@@ -1,6 +1,5 @@
 {
 	"info": {
-		"_postman_id": "232042fe-1b99-402c-8ff8-a7e2cefa4611",
 		"name": "API Walkthrough",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -34,12 +33,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/.well-known/jwt-issuer",
+					"raw": "http://{{baseUrl}}/.well-known/jwt-issuer",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						".well-known",
 						"jwt-issuer"
@@ -81,12 +79,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
+					"raw": "http://{{baseUrl}}/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"status-list",
 						"urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387"
@@ -140,12 +137,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/internal/issue",
+					"raw": "http://{{baseUrl}}/internal/issue",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"internal",
 						"issue"
@@ -199,12 +195,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/internal/disclose?audience=aud-123&nonce=nonce-456&token={{issuance_token}}",
+					"raw": "http://{{baseUrl}}/internal/disclose?audience=aud-123&nonce=nonce-456&token={{issuance_token}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"internal",
 						"disclose"
@@ -266,12 +261,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/internal/verify",
+					"raw": "http://{{baseUrl}}/internal/verify",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"internal",
 						"verify"
@@ -322,12 +316,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
+					"raw": "http://{{baseUrl}}/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"status-list",
 						"urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387"
@@ -378,12 +371,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/internal/validate",
+					"raw": "http://{{baseUrl}}/internal/validate",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"internal",
 						"validate"
@@ -434,12 +426,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
+					"raw": "http://{{baseUrl}}/status-list/urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"status-list",
 						"urn:uuid:3008f9be-ea9a-4a91-8707-84b5d402a387"
@@ -488,12 +479,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/internal/validate",
+					"raw": "http://{{baseUrl}}/internal/validate",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"internal",
 						"validate"
@@ -519,6 +509,11 @@
 		{
 			"key": "verified_presentation",
 			"value": ""
+		},
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000",
+			"type": "string"
 		}
 	]
 }
