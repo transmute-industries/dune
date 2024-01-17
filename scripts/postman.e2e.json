@@ -119,6 +119,7 @@
 							"    pm.expect(protectedHeader['alg']).to.eql('ES384')",
 							"    pm.expect(claimset['@context'][0]).to.eql('https://www.w3.org/ns/credentials/v2')",
 							"    pm.collectionVariables.set(\"issuance_token\", token);",
+							"    pm.collectionVariables.set(\"nonce\", `${new Date().getTime()}`);",
 							"});",
 							"",
 							""
@@ -163,6 +164,7 @@
 						"exec": [
 							"const responseJson = pm.response.json();",
 							"",
+							"",
 							"pm.test(\"should have status code 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
@@ -184,6 +186,15 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -199,7 +210,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/internal/disclose?audience=aud-123&nonce=nonce-456&token={{issuance_token}}",
+					"raw": "http://localhost:3000/internal/disclose?audience=https://dune.did.ai&nonce={{nonce}}&token={{issuance_token}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -212,11 +223,11 @@
 					"query": [
 						{
 							"key": "audience",
-							"value": "aud-123"
+							"value": "https://dune.did.ai"
 						},
 						{
 							"key": "nonce",
-							"value": "nonce-456"
+							"value": "{{nonce}}"
 						},
 						{
 							"key": "token",
@@ -258,7 +269,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"audience\": \"aud-123\",\n    \"nonce\": \"nonce-456\",\n    \"token\": \"{{disclosed_token}}\"\n}",
+					"raw": "{\n    \"audience\": \"https://dune.did.ai\",\n    \"nonce\": \"{{nonce}}\",\n    \"token\": \"{{disclosed_token}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -518,6 +529,10 @@
 		},
 		{
 			"key": "verified_presentation",
+			"value": ""
+		},
+		{
+			"key": "nonce",
 			"value": ""
 		}
 	]
