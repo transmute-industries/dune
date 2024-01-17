@@ -1,0 +1,89 @@
+
+get:
+  operationId: submitPresentation
+  summary: Submit Presentation
+  description: |-
+    This endpoint accepts presentations of the form:
+    - [application/vc+sd-jwt](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-01#name-application-vcsd-jwt)
+    - [application/vp+ld+json+sd-jwt](https://w3c.github.io/vc-jose-cose/#vp-ld-sd-jwt-media-type)
+    - base64url encoded [application/vp+ld+json+cose](https://w3c.github.io/vc-jose-cose/#vp-ld-json-cose-media-type)
+  tags:
+    - SPICE
+  security:
+    - OAuth2:
+        - 'presentation:submit'
+  parameters:
+    - in: query
+      name: presentation
+      required: true
+      description: A url safe encoded presentation
+      schema:
+        type: string
+      examples:
+        - "OAuth SD-JWT in Combined Format for Presentation"
+        - "W3C SD-JWT Verifiable Presentation"
+        - "W3C COSE Verifiable Presentation"
+      # examples:
+      #   - title: OAuth SD-JWT in Combined Format for Presentation
+      #     description: application/vc+sd-jwt
+      #     type: string
+      #     example: "eyLsXh8uDCc...FZAfHkxZsRGC9Xs~kxZsRG...~eyLsXh8uDCc...FZAfHkxZsRGC9Xs"
+      #   - title: W3C SD-JWT Verifiable Presentation
+      #     description: application/vp+ld+json+sd-jwt
+      #     type: string
+      #     example: "eyLsXh8uDCc...FZAfHkxZsRGC9Xs~kxZsRG...~eyLsXh8uDCc...FZAfHkxZsRGC9Xs"
+      #   - title: W3C COSE Verifiable Presentation
+      #     description: base64url encoded application/vp+ld+json+cose
+      #     type: string
+      #     example: "FZAfHkxZsRGC9Xs...FZAfHkxZsRGC9Xs"
+       
+  responses:
+    "200":
+      description: Presentation Accepted
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Presentation accepted"
+    "302":
+      description: Workflow continuation required
+      headers:
+        Location:
+          description: Callback URL for delivering state to the client for their next submission
+          schema:
+            type: string
+            format: uri
+            example: "https://manufacturer.vendor.example/workflows/continue#state=dkZmYxMzE2"
+    "400":
+      description: Rejected
+      headers:
+        DPoP-Nonce: 
+          description: Nonce to be used with confirmation method
+          schema:
+            type: string
+            example: eyJ7S_zG.eyJbYu3.xQmBj-1
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - type: object
+                properties:
+                  error:
+                    type: string
+                    example: "use_confirmation_method"
+                  message:
+                    type: string
+                    example: "Verifier requires nonce and proof of possession"
+              - type: object
+                properties:
+                  error:
+                    type: string
+                    example: "rejected_by_verifier_policy"
+                  message:
+                    type: string
+                    example: "Rejected by verifier policy"
+    default:
+      $ref: "../../../responses/UnexpectedError.yml"

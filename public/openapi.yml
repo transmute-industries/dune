@@ -14,8 +14,16 @@ servers:
 tags:
   - name: Discover
   - name: Internal
+  - name: SCITT
+  - name: SPICE
   
 paths:
+
+  /scitt/signed-statement-registration:
+    $ref: './resources/scitt/signed-statement-registration.yml'
+
+  /spice/presentation-submission:
+    $ref: './resources/spice/presentation-submission.yml'
   
   /.well-known/jwt-issuer:
     $ref: './resources/.well-known/jwt-issuer.yml'
@@ -26,9 +34,10 @@ paths:
 
   /issuers/{identifier}:
     $ref: './resources/issuers/issuers.yml'
+
   /status-list/{identifier}:
     $ref: './resources/status-list/list.yml'
-    
+
   /internal/issue:
     $ref: './resources/internal/issue.yml'
   /internal/disclose:

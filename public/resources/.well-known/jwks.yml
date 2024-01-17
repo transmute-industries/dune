@@ -3,7 +3,8 @@ get:
   summary: JSON Web Key Set
   operationId: getTransparencyServiceJsonWebKeySet
   tags:
-    - Discover
+    - SCITT
+    - SPICE
   responses:
     "200":
       description: Expected response to a valid request

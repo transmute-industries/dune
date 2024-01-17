@@ -1,0 +1,71 @@
+
+get:
+  operationId: registerSignedStatement
+  summary: Register Signed Statement
+  description: |-
+    This endpoint accepts signed statements of the form:
+    - [application/cose](https://www.iana.org/assignments/media-types/application/cose)
+  tags:
+    - SCITT
+  security:
+    - OAuth2:
+        - 'signed-statement:register'
+  parameters:
+    - in: query
+      name: signed-statement
+      required: true
+      description: A base64url encoded cose-sign-1 based scitt signed statement
+      schema:
+        type: string
+        example: "NzbLsXh8uDCc...FZAfHkxZsRGC9Xs"
+
+  responses:
+    "200":
+      description: Accepted
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              receipt:
+                type: string
+                example: "https://transparency.example/receipts/urn:ietf:params:scitt:signed-statement:sha-256:base64url:5i6UeRzg1...qnGmr1o"
+    "302":
+      description: Receipt Issued
+      headers:
+        Location:
+          description: Callback URL for delivering the receipt to a client.
+          schema:
+            type: string
+            format: uri
+            example: "https://software.vendor.example/redirect#receipt=NzbLsXh8uDCc...FZAfHkxZsRGC9Xs&state=dkZmYxMzE2"
+    "400":
+      description: Rejected
+      headers:
+        DPoP-Nonce: 
+          description: Nonce to be used with confirmation method
+          schema:
+            type: string
+            example: eyJ7S_zG.eyJbYu3.xQmBj-1
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - type: object
+                properties:
+                  error:
+                    type: string
+                    example: "use_confirmation_method"
+                  message:
+                    type: string
+                    example: "Transparency service requires nonce and proof of possession"
+              - type: object
+                properties:
+                  error:
+                    type: string
+                    example: "rejected_by_registration_policy"
+                  message:
+                    type: string
+                    example: "Rejected by registration policy"
+    default:
+      $ref: "../../../responses/UnexpectedError.yml"

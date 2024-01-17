@@ -3,7 +3,7 @@ get:
   summary: Issuer
   operationId: resolveIssuer
   tags:
-    - Discover
+    - SCITT
   security:
     - OAuth2:
         - 'issuers:resolve'
