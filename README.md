@@ -1,14 +1,12 @@
 # Dune
 
-An Open API for W3C Verifiable Credentials 2.0
-
-## Critical Blockers
-
-- 🔥 https://github.com/w3c/vc-jose-cose/pull/144
-- 🔥 https://github.com/w3c/vc-jose-cose/issues/158
+An Open API for Digital Credentials
 
 ## Roadmap
 
-- Support for SD-JWT
-- Support for Status List 2021
-- Support for did:web
+- [x] Support for SD-JWT
+- [x] Support for Status List 2021
+- [x] Support for did:web
+- [x] Support Metadata discovery
+- [ ] Support for SD-CWT
+- [ ] Support Transparency Tokens
