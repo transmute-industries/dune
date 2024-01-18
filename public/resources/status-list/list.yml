@@ -2,10 +2,10 @@
 
 
 get:
-  summary: Status List
-  operationId: resolveStatusList
+  summary: Get Credential Status List
+  operationId: resolveCredentialStatusList
   tags:
-    - Discover
+    - SPICE
   security:
     - OAuth2:
         - 'status-list:resolve'
@@ -29,10 +29,10 @@ get:
       $ref: "../../responses/UnexpectedError.yml"
 
 patch:
-  summary: Update Status
+  summary: Update Credential Status
   operationId: updateCredentialStatus
   tags:
-    - Internal
+    - SPICE
   security:
     - OAuth2:
         - 'status-list:update'
@@ -55,14 +55,12 @@ patch:
               type: number
               title: position to be updated
               description: position in the list representing the status for one or more credentials
+              example: 0
             value:
               type: number
               title: value to be set
               description: 0 reflects that the status is not set, 1 reflects that the status is set
-          example: {
-              'position': 0,
-              'value': 0,
-            }
+              example: 1
   responses:
     "200":
       description: Expected response to a valid request

@@ -1,9 +1,9 @@
-summary: Controller Document
 get:
-  summary: Controller Document
-  operationId: getTransparencyServiceControllerDocument
+  summary: Get Controller Document
+  operationId: getControllerDocument
   tags:
-    - Discover
+    - SCITT
+    - SPICE
   responses:
     "200":
       description: Expected response to a valid request

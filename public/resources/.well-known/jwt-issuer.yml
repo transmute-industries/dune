@@ -3,7 +3,8 @@ get:
   summary: JWT Issuer Metadata
   operationId: getTransparencyServiceJwtIssuerMetadata
   tags:
-    - Discover
+    - SCITT
+    - SPICE
   responses:
     "200":
       description: Expected response to a valid request
